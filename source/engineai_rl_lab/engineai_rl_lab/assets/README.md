@@ -1,0 +1,1 @@
+pm01和t800的usd从[engineai_robotics_native_sdk](https://github.com/engineai-robotics/engineai_robotics_native_sdk)的urdf转换得来，pm01_23dof_simplified为简化了头部关节的urdf模型，仅适用于amp任务
