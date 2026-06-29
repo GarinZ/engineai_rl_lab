@@ -36,11 +36,11 @@ pip install -e source/engineai_rl_lab
 ```bash
 # Convert CSV files to NPZ files. The generated NPZ files are saved in the same directory.
 python scripts/csv_to_npz.py --robot pm01 --input_fps 30 -f datasets/tracking/pm01/dance.csv
-python scripts/csv_to_npz.py --robot t800 --input_fps 30 -f datasets/tracking/t800/dance.csv
+python scripts/csv_to_npz.py --robot t800 --input_fps 30 -f datasets/tracking/t800/dance_t800.csv
 
 # Replay NPZ files.
 python scripts/replay_npz.py --robot pm01 --input_file datasets/tracking/pm01/dance.npz
-python scripts/replay_npz.py --robot t800 --input_file datasets/tracking/t800/dance.npz
+python scripts/replay_npz.py --robot t800 --input_file datasets/tracking/t800/dance_t800.npz
 ```
 
 2. Train:
@@ -49,7 +49,7 @@ python scripts/replay_npz.py --robot t800 --input_file datasets/tracking/t800/da
 python scripts/tracking/train.py --task Tracking-Flat-PM01-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/pm01/dance.npz
 
 # T800
-python scripts/tracking/train.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800/dance.npz
+python scripts/tracking/train.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800/dance_t800.npz
 
 # View training logs.
 python -m tensorboard.main --logdir logs
@@ -61,7 +61,7 @@ python -m tensorboard.main --logdir logs
 python scripts/tracking/play.py --task Tracking-Flat-PM01-Wo-State-Estimation-v0 --num_envs 1 --motion_file datasets/tracking/pm01/dance.npz --load_run 2026-06-23_09-58-43 --checkpoint dance.pt
 
 # T800
-python scripts/tracking/play.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --num_envs 1 --motion_file datasets/tracking/t800/dance.npz --load_run 2026-06-22_22-57-14 --checkpoint dance.pt
+python scripts/tracking/play.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --num_envs 1 --motion_file datasets/tracking/t800/dance_t800.npz --load_run 2026-06-28_20-47-15 --checkpoint dance.pt
 ```
 
 ## Deployment

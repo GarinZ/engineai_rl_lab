@@ -80,6 +80,8 @@ datasets/amp
 logs/rsl_rl/amp_velocity_flat_pm01
 source/engineai_rl_lab/engineai_rl_lab/assets/pm01_23dof_simplified
 datasets/mytracking
+scripts/test
 
 # logs/rsl_rl
 outputs
+logs/rsl_rl/backup
