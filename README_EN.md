@@ -2,10 +2,12 @@
 [![IsaacSim](https://img.shields.io/badge/IsaacSim-5.1.0-silver.svg)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
 [![Isaac Lab](https://img.shields.io/badge/IsaacLab-2.3.2-silver)](https://isaac-sim.github.io/IsaacLab)
 
-[中文](README.md)
+[中文](README.md)| English
 
 ## Overview
 This project provides a set of reinforcement learning environments based on Isaac Lab. It currently supports EngineAI PM01 and T800 robots, with implemented tasks including whole-body tracking.
+
+[Demo Video](https://www.bilibili.com/video/BV14GTk6UE9o/?share_source=copy_web&vd_source=74098b4d7182a602fcb3a63bb054e83f)
 
 |Robot|Training| Sim2Sim |Deploy|
 |:--------:|:--------:|:--------:|:--------:|
@@ -34,13 +36,20 @@ pip install -e source/engineai_rl_lab
 ### Whole-Body Tracking
 1. Convert CSV files to NPZ files:
 ```bash
-# Convert CSV files to NPZ files. The generated NPZ files are saved in the same directory.
+# Convert CSV files to NPZ files. The generated NPZ files are # PM01
 python scripts/csv_to_npz.py --robot pm01 --input_fps 30 -f datasets/tracking/pm01/dance.csv
+# T800
 python scripts/csv_to_npz.py --robot t800 --input_fps 30 -f datasets/tracking/t800/dance_t800.csv
+# T800pro
+python scripts/csv_to_npz.py --robot t800pro --input_fps 30 -f datasets/tracking/t800pro/dance_t800pro.csv
 
 # Replay NPZ files.
+# PMm01
 python scripts/replay_npz.py --robot pm01 --input_file datasets/tracking/pm01/dance.npz
+# T800
 python scripts/replay_npz.py --robot t800 --input_file datasets/tracking/t800/dance_t800.npz
+# T800pro
+python scripts/replay_npz.py --robot t800pro --input_file datasets/tracking/t800pro/dance_t800.npz
 ```
 
 2. Train:
@@ -50,6 +59,9 @@ python scripts/tracking/train.py --task Tracking-Flat-PM01-Wo-State-Estimation-v
 
 # T800
 python scripts/tracking/train.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800/dance_t800.npz
+
+# T800pro
+python scripts/tracking/train.py --task Tracking-Flat-T800pro-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800pro/dance_t800pro.npz
 
 # View training logs.
 python -m tensorboard.main --logdir logs
@@ -62,6 +74,8 @@ python scripts/tracking/play.py --task Tracking-Flat-PM01-Wo-State-Estimation-v0
 
 # T800
 python scripts/tracking/play.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --num_envs 1 --motion_file datasets/tracking/t800/dance_t800.npz --load_run 2026-06-28_20-47-15 --checkpoint dance.pt
+
+# T800pro
 ```
 
 ## Deployment
@@ -97,7 +111,7 @@ engineai_robotics_env
 python3 tools/virtual_gamepad/virtual_gamepad.py
 ```
 
-![Gamepad control interface](docs/gamepad.png)
+![Gamepad control interface](docs/gamepad_en.png)
 
 For remote controller key mappings, please refer to [engineai_robotics_native_sdk](https://github.com/engineai-robotics/engineai_robotics_native_sdk).
 

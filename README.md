@@ -2,10 +2,13 @@
 [![IsaacSim](https://img.shields.io/badge/IsaacSim-5.1.0-silver.svg)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
 [![Isaac Lab](https://img.shields.io/badge/IsaacLab-2.3.2-silver)](https://isaac-sim.github.io/IsaacLab)
 
-[English](README_EN.md)
+中文|[English](README_EN.md)
 
 ## 概览
 本项目提供了一套基于Isaac Lab的强化学习环境，目前已经支持众擎PM01、T800机器人，实现的任务包括whole body tracking。
+
+[演示视频](https://www.bilibili.com/video/BV14GTk6UE9o/?share_source=copy_web&vd_source=74098b4d7182a602fcb3a63bb054e83f)
+
 |Robot|Training| Sim2Sim |Deploy|
 |:--------:|:--------:|:--------:|:--------:|
 |||**whole body tracking**|||
@@ -33,12 +36,20 @@ pip install -e source/engineai_rl_lab
 1. 将csv文件转换npz文件
 ```bash
 # csv文件转换为npz文件,npz文件在同一目录下
+# PM01
 python scripts/csv_to_npz.py --robot pm01 --input_fps 30 -f datasets/tracking/pm01/dance.csv
+# T800
 python scripts/csv_to_npz.py --robot t800 --input_fps 30 -f datasets/tracking/t800/dance_t800.csv
+# T800pro
+python scripts/csv_to_npz.py --robot t800pro --input_fps 30 -f datasets/tracking/t800pro/dance_t800pro.csv
 
 # 重放npz文件
+# PMm01
 python scripts/replay_npz.py --robot pm01 --input_file datasets/tracking/pm01/dance.npz
+# T800
 python scripts/replay_npz.py --robot t800 --input_file datasets/tracking/t800/dance_t800.npz
+# T800pro
+python scripts/replay_npz.py --robot t800pro --input_file datasets/tracking/t800pro/dance_t800.npz
 ```
 
 2. 训练
@@ -48,6 +59,9 @@ python scripts/tracking/train.py --task Tracking-Flat-PM01-Wo-State-Estimation-v
 
 # T800
 python scripts/tracking/train.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800/dance_t800.npz
+
+# T800pro
+python scripts/tracking/train.py --task Tracking-Flat-T800pro-Wo-State-Estimation-v0 --headless --num_envs 4096 --motion_file datasets/tracking/t800pro/dance_t800pro.npz
 
 # 查看训练日志
 python -m tensorboard.main --logdir logs
@@ -60,6 +74,8 @@ python scripts/tracking/play.py --task Tracking-Flat-PM01-Wo-State-Estimation-v0
 
 # T800
 python scripts/tracking/play.py --task Tracking-Flat-T800-Wo-State-Estimation-v0 --num_envs 1 --motion_file datasets/tracking/t800/dance_t800.npz --load_run 2026-06-28_20-47-15 --checkpoint dance.pt
+
+# T800pro
 ```
 
 ## 部署
