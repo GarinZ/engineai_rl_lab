@@ -72,8 +72,10 @@ T800_CYLINDER_CFG = RobotArticulationCfg(
             max_angular_velocity=1000.0,
             max_depenetration_velocity=1.0,
         ),
+        # 开启enabled_self_collisions会影响训练速度
+        # setting enabled_self_collisions to True will slow down training.
         articulation_props=sim_utils.ArticulationRootPropertiesCfg(
-            enabled_self_collisions=True, solver_position_iteration_count=8, solver_velocity_iteration_count=4
+            enabled_self_collisions=False, solver_position_iteration_count=8, solver_velocity_iteration_count=4
         ),        
     ),
     init_state=ArticulationCfg.InitialStateCfg(
